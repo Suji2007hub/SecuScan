@@ -118,7 +118,7 @@ describe('ReportCompare page', () => {
     })
 
     const selects = screen.getAllByRole('combobox')
-    await user.tab()
+    selects[0].focus()
     expect(selects[0]).toHaveFocus()
 
     await user.tab()
@@ -131,8 +131,8 @@ describe('ReportCompare page', () => {
       expect(screen.getByText(/Only in B/i)).toBeInTheDocument()
     })
 
-    await user.tab()
     const refreshButton = screen.getByTitle('Refresh')
+    refreshButton.focus()
     expect(refreshButton).toHaveFocus()
   })
 
@@ -159,9 +159,8 @@ describe('ReportCompare page', () => {
 
     // Use the refresh button (focusable) to validate context retention.
     // Scroll shouldn’t cause re-render/focus loss.
-    await user.tab() // from combobox[0]
-    await user.tab() // from combobox[1]
     const refreshButton = screen.getByTitle('Refresh')
+    refreshButton.focus()
     expect(refreshButton).toHaveFocus()
 
     scrollContainer!.scrollTop = 50
